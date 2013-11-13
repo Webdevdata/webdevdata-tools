@@ -56,8 +56,8 @@ strong,1
 
 ## Building tools
 
- 1. ```go get github.com/ernesto-jimenez/webdevdata-tools```
- 2. ```cd $GOPATH/src/github.com/ernesto-jimenez/webdevdata-tools```
+ 1. ```go get github.com/webdevdata/webdevdata-tools```
+ 2. ```cd $GOPATH/src/github.com/webdevdata/webdevdata-tools```
  3. ```make all```
  4. Tools are in the build directory
 
