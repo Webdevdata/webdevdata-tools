@@ -11,10 +11,12 @@ func main() {
   file     := flag.Arg(0)
 
   csv := csv.NewWriter(os.Stdout)
-  selector := "meta[name]" // All meta tags with name attribute
+  selector := "html[manifest]" // all html tags with manifest attribute
   webdevdata.ProcessMatchingTags(file, selector, func (node *html.Node) {
-    name    := webdevdata.GetAttr("name", node.Attr)
-    csv.Write([]string{file, name})
+    manifest    := webdevdata.GetAttr("manifest", node.Attr)
+    if manifest != "" {
+      csv.Write([]string{file, manifest})
+    }
   })
 
   csv.Flush()

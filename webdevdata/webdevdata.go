@@ -1,17 +1,28 @@
 package webdevdata
 
 import "code.google.com/p/go.net/html"
+import "code.google.com/p/cascadia"
 import "os"
 import "io"
 import "fmt"
 
-func ProcessTags(file string, process func(html.Token)) {
-  html_reader, err := os.Open(file)
+func ProcessMatchingTags(file string, cssSel string, run func(*html.Node)) {
+  selector := cascadia.MustCompile(cssSel)
+  htmlReader := reader(file)
+  node, err := html.Parse(htmlReader)
   if err != nil {
     fmt.Println(err)
     os.Exit(-1)
   }
-  d := html.NewTokenizer(html_reader)
+  matchedNodes := selector.MatchAll(node)
+  for _, node := range matchedNodes {
+    run(node)
+  }
+}
+
+func ProcessTags(file string, process func(html.Token)) {
+  htmlReader := reader(file)
+  d := html.NewTokenizer(htmlReader)
   for {
     // token type
     tokenType := d.Next()
@@ -40,5 +51,14 @@ func GetAttr(key string, attrs []html.Attribute) (string) {
     }
   }
   return ""
+}
+
+func reader(file string) io.Reader {
+  reader, err := os.Open(file)
+  if err != nil {
+    fmt.Println(err)
+    os.Exit(-1)
+  }
+  return reader
 }
 

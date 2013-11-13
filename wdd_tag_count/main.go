@@ -4,7 +4,7 @@ import "flag"
 import "os"
 import "encoding/csv"
 import "code.google.com/p/go.net/html"
-import "github.com/ernesto-jimenez/webdevdata-tools/webdevdata"
+import "github.com/webdevdata/webdevdata-tools/webdevdata"
 import "strconv"
 
 func main() {
@@ -17,8 +17,8 @@ func main() {
   })
 
   csv := csv.NewWriter(os.Stdout)
-  for key, value := range tags {
-    csv.Write([]string{key, strconv.Itoa(value)})
+  for tag, count := range tags {
+    csv.Write([]string{file, tag, strconv.Itoa(count)})
   }
   csv.Flush()
 }
