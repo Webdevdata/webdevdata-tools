@@ -3,12 +3,19 @@
 Small set of command line tools written in Go to help extracting data
 from webdevdata.org.
 
-## Building tools
+## Using tools
 
- 1. ```go get github.com/ernesto-jimenez/webdevdata-tools```
- 2. ```cd $GOPATH/src/github.com/ernesto-jimenez/webdevdata-tools```
- 3. ```make all```
- 4. Tools are in the build directory
+You can find cross-compiled executables in the ```release``` directory.
+
+```bash
+$ ls release
+webdevdata-tools-darwin-386.tgz
+webdevdata-tools-darwin-amd64.tgz
+webdevdata-tools-linux-386.tgz
+webdevdata-tools-linux-amd64.tgz
+webdevdata-tools-windows-386.tgz
+webdevdata-tools-windows-amd64.tgz
+```
 
 ## ```wdd_meta_names [file]```
 
@@ -51,3 +58,12 @@ strong,1
 [...]
 ```
 
+## Building tools
+
+ 1. ```go get github.com/ernesto-jimenez/webdevdata-tools```
+ 2. ```cd $GOPATH/src/github.com/ernesto-jimenez/webdevdata-tools```
+ 3. ```make all```
+ 4. Tools are in the build directory
+
+You can use ```make release``` to generate cross-compiled binaries for Linux,
+Windows and Mac.
