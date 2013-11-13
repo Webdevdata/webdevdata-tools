@@ -3,15 +3,14 @@
 Small set of command line tools written in Go to help extracting data
 from webdevdata.org.
 
-## Installation
+## Building tools
 
- 1. Clone the repository
- 2. Run ```make all``` in the project directory
- 3. Tools are in the build directory
+ 1. ```go get github.com/ernesto-jimenez/webdevdata-tools```
+ 2. ```cd $GOPATH/src/github.com/ernesto-jimenez/webdevdata-tools```
+ 3. ```make all```
+ 4. Tools are in the build directory
 
-## wdd_meta_names
-
-```wdd_meta_names [file]```
+## ```wdd_meta_names [file]```
 
 Checks HTML meta tags from ```file``` and prints a CSV with
 ```file,meta_name``` to ```STDOUT```.
@@ -33,9 +32,7 @@ GNU/Parallel instead of ```xargs``` to parallelize work):
 $ find webdevdata.org-2013-10-30-231036 -name "*tml.txt" | parallel "wdd_meta_names >> meta_names.csv"
 ```
 
-## wdd_tag_count
-
-```wdd_tag_count [file]```
+## ```wdd_tag_count [file]```
 
 Counts all HTML tags from ```file``` and prints a CSV with
 ```tag,count``` to ```STDOUT```.
