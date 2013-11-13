@@ -25,8 +25,7 @@ Checks HTML meta tags from ```file``` and prints a CSV with
 example:
 
 ```bash
-$ wdd_meta_names
-webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt
+$ wdd_meta_names webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt
 ./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,description
 ./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,google-site-verification
 ./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,google-site-verification
