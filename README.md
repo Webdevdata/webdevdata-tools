@@ -8,7 +8,7 @@ from webdevdata.org.
 **You can download binaries for Linux, Windows and Mac in the [GitHub releases
 page][releases].**
 
-## ```wdd_select [-atrs=attr1,attr2...] [CSS selector] [file]
+## ```wdd_select [-atrs=attr1,attr2...] [CSS selector] [file]```
 
 Searches for all tags matching the proviced ```CSS selector``` in
 ```file``` and prits a CSV with ```file,tag_name``` to ```STDOUT```.
