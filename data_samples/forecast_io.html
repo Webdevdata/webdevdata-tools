@@ -1,0 +1,479 @@
+<!doctype html>
+<html manifest="cache.desktop.manifest">
+<head>
+  <meta charset="utf-8">
+  <title>Forecast</title>
+
+  <meta name="description" content="Full-featured, global weather service, complete with 7-day forecasts that cover world, beautiful weather visualizations, and a time machine for exploring the weather in the past and far future.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+
+  <script>
+    if(navigator.userAgent.toLowerCase().indexOf("android") > -1)
+      document.write('<meta name="viewport" content="width=882, maximum-scale=1.0">')
+    else
+      document.write('<meta name="viewport" content="width=882, user-scalable=no">')
+  </script>
+
+  <link rel="apple-touch-icon-precomposed" href="images/icons/54.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/icons/144.png">
+
+  <link rel="stylesheet" href="http://fast.fonts.com/t/1.css?apiType=css&projectid=278562c8-71b8-4a51-999f-6bcf38989892">
+
+  <link rel="stylesheet" href="css/desktop.css?rel=1383165876172">
+</head>
+<body class="desktop show_sponsor">
+  <!-- TEST -->
+  <div class="inner">
+    
+    <div id="search_area">
+      <div class="inner">
+        
+        <div class="logo"><a href="/">Forecast.io</a></div>
+        
+        <div class="refresh loading">
+          <span class="pictos icon">1</span>
+          <span class="text">refresh</span>
+          <span class="pictos dotdotdot">.</span>
+        </div>
+        
+        <div class="location_controls">
+          <input class="location_field" type="text" placeholder="Enter a location" x-webkit-speech />
+          <div class="clear pictos">*</div>
+        </div>
+        
+        <div class="buttons">
+          <div class="forecast button">
+            <span class="icon">Y</span>
+            <span class="label">forecast</span>
+          </div>
+          
+          <div class="time_machine button">
+            <span class="icon">t</span>
+            <span class="label">time machine</span>
+          </div>
+          
+          <div class="stats button" style="display:none">
+            <span class="icon">Y</span>
+            <span class="label">stats</span>
+          </div>
+          
+          <div class="time_machine_modal">
+            <div class="inner">
+              <h2>Enter a date to explore the weather at this location in the past or the future.</h2>
+              
+              <span class="datepicker">
+                <span class="pictos">\</span>
+                <input type="text" />
+              </span>
+              
+              <input type="text" class="time_field" placeholder="e.g. December 18, 1981" />
+              
+              <div class="time_submit no-select">
+                <div class="inner">
+                  <span class="pictos">,</span>
+                  Activate Time Machine!
+                </div>
+              </div>
+              
+              <div class="error">Oops! Invalid date.</div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <a href="javascript:;" class="stats_forecast_link" style="display:none">
+          <span class="icon"></span>
+          <span class="text"></span>
+        </a>
+        
+        <div id="units_toggle">
+          <div class="inner">
+            <span class="f selected">&deg;F</span>
+            <span class="c">&deg;C</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div id="location_strip">
+      
+      <div id="current_location_entry" class="saved_forecast permanent">
+        <span class="forecast_name">Current Location <img width="13" height="13" style="position: relative; top: 1px" alt="Location Services" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAACHklEQVR42rWVT2iSYRzHN2fNZovtHaztJd6IRsIaY64RYx6kw6BA6FCEeejgMW/dskNQeBjCmHQwQshLgh2CtIjx8m7gVfAm6EEQEUEUBMV/KNr3J0+8oeNNk+cHH17e33P48H2e38Mzw6lmwWVgAHODTr/fn4aLBPNgBUhgjcmmFg0nEMAGOHC73c/S6bSL+lOLmOASWAK3SWC3253JZPIz1s8VRTlATzeV6C/BLbBvs9lexOPxQK/XOydJuVw+GWwjq/8R6ME1cBPct1qtz2OxmL/b7Z6RgHEWjUZ3B4lZTSpYBBLYM5vNT2VZ/tDpdBRVAECxWDz6czZji9h4XgU3wK7JZHociUSOW62WPCwgsHVKKBS6y9Ko9Q+BEYhgR5IkWzgcPmo2m6ejApVCofBOTaMhYlOyANbBtiAID4PB4PtqtfpLS8DSyIFAYGMkDWpYcAVcB1tGo/HQ7/e/rVQqP7QFKrlc7g2bxtFiAgNYBZt6vf6B1+t9XSqVvo8rIDB1pz6fT5rRqDmwDO4ggRPz/3V8gUo2m31Fk6kl0uXz+X1M0ceJBQyM+E+Px7OuJZn0sooXiTKZzEtKw1XUbrejLpdrhRa5ilKplJPOmasI5/rN4XAs0wJXEZ4DB6XhKmo0GmGLxbJITa6iRCLxhK4GL9EaSWq12hdRFBeox0skkAgv6SNKw1NkwKR9oi/98xTp6vX6PfpyEGkzbv0GanL/1xkqi7UAAAAASUVORK5CYII="></span>
+      </div>
+      
+      <div class="divider"></div>
+
+      <div id="location_list">
+        <script id="saved_forecast_template" type="text/x-handlebars-template">
+          <div class="saved_forecast editable" data-lat="{{lat}}" data-lon="{{lon}}">
+            <span class="forecast_name">{{name}}</span>
+            <span class="delete_button"></span>
+          </div>
+        </script>
+      </div>
+
+      <div id="location_editing" class="btn-group">
+        <button id="add_location_button" class="btn btn-mini btn-inverse"><span>Add</span></button>
+        <button id="edit_locations_button" class="btn btn-mini btn-inverse"><span>Edit</span></button>
+      </div>
+
+    </div>
+
+    <div id="main">
+      
+      <!-- Loading screen -->
+      <div id="loading" class="revealed">
+        LOADING
+<!-- 
+        <canvas id="loader_canvas" width="256" height="256"></canvas>
+ -->
+      </div>
+      
+      <!-- The main forecast page, including current conditions, radar, and 7 day outlook -->
+      <div id="forecast" class="page" style="display:none">
+        
+        <div id="alerts" style="display:none">
+          <div class="inner"></div>
+          
+          <div class="pagination">
+            <a href="javascript:;" onclick="UIManager.next_alert()">
+              <span class="num">1 of 2</span>
+              <span class="pictos">]</span>
+            </a>
+          </div>
+        </div>
+        
+        <div id="map" class="hide_controls">
+          <div class="top_bar">
+            <div class="label">Precip Map</div>
+            <ul class="levels segmented-control"></ul>
+            <div class="time"><span></span></div>
+          </div>
+          
+          <div class="global_shadow"></div>
+          
+          <div class="mask">
+            <div class="mask_top"></div>
+            <div class="mask_bottom"></div>
+            <div class="mask_left"></div>
+            <div class="mask_right"></div>
+          </div>
+          
+          <div class="map_container">
+            <canvas width="500" height="500" style="width:500px; height: 500px"></canvas>
+            <div class="cities"></div>
+            <div class="location">
+              <span class="pointer"></span>
+              <span class="shadow"></span>
+            </div>
+            <div class="loading">LOADING</div>
+            <div class="disabled">NO RADAR AVAILABLE AT THIS TIME</div>
+          </div>
+          
+          <div id="fps"></div>
+          
+          <div class="controls">
+            
+            <div class="timeline">
+              <div class="progress">
+                <span class="pre"></span>
+                <span class="post"></span>
+              </div>
+              <div class="labels"></div>
+              <div class="slider">
+                <div class="handle">
+                  <span class="line"></span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="play_button paused"></div>
+          </div>
+          
+          <div class="load_animation">
+            <span class="pictos">9</span>
+            <span>Click to load animation</span>
+          </div>
+          
+          <div class="load_animation_small">
+            <span class="pictos">9</span>
+          </div>
+          
+        </div>
+        
+        <div class="overview_container clear">
+          <div class="inner">
+          
+            <section class="currently section">
+              <div class="inner">
+                <h2>RIGHT NOW <span class="more_button pictos">+</span></h2>
+                
+                <div class="current_container">
+                  <div class="less">
+                    <canvas id="icon_current" width="82" height="82" style="width:82px; height: 82px"></canvas>
+                    <div class="temp"></div>
+                    <div class="desc"></div>
+                  </div>
+                  
+                  <div class="more">
+                    <div class="temps">
+                      <div class="dir m"></div>
+                      <div class="high_low"></div>
+                    </div>
+                    
+                    <div class="table">
+                      <div class="wind">
+                        <span class="label">Wind:</span>
+                        <span class="val"></span>
+                      </div>
+                      <div class="humidity">
+                        <span class="label">Humidity:</span>
+                        <span class="val"></span>
+                      </div>
+                      <div class="dewpoint">
+                        <span class="label">Dew Pt:</span>
+                        <span class="val"></span>
+                      </div>
+                      <div class="visibility">
+                        <span class="label">Visibility:</span>
+                        <span class="val"></span>
+                      </div>
+                      <div class="pressure">
+                        <span class="label">Pressure:</span>
+                        <span class="val"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </section>
+            
+            <section class="next_hour section">
+              <div class="inner">
+                <h2>NEXT HOUR</h2>
+                <div class="desc"></div>
+              </div>
+            </section>
+            
+            <section class="next_24_hours section">
+              <div class="inner">
+                <h2>NEXT 24 HOURS</h2>
+                <div class="desc"></div>
+              </div>
+            </section>
+            
+            <div id="fusion_ad">
+              <a href="http://fusionads.net" target="_blank">Powered by Fusion</a>
+            </div>
+<!-- 
+            <a class="sponsor section" href="#" target="_blank">
+              <span class="inner">
+                <img width="60" />
+                <span class="text">
+                  <span class="message"></span>
+                  <span class="attribution"></span>
+                </span>
+              </span>
+            </a>
+ -->
+          
+          </div>
+        </div>
+        
+        <div style="clear: left"></div>
+  
+        <script id="day_template" type="text/x-handlebars-template">
+          <div data-time="{{date}}" class="day panel {{conditions}}">
+            <div class="top">
+              <div class="state_color"><span></span></div>
+              <div class="day_name">{{name}}</div>
+              <div class="day_icon"></div>
+              <div class="day_text_wrapper">
+                <p class="day_text">{{summary}}</p>
+              </div>
+              <div class="temperature_range">
+                <div class="ranger">
+                  <span class="temperature_min">{{temperature_min}}&deg;</span>  
+                  <span class="temperature_max">{{temperature_max}}&deg;</span>
+                </div>
+              </div>
+              
+              <div class="button">
+                <span class="plus">+</span>
+                <span class="minus">-</span>
+              </div>
+            </div>
+            
+            <div class="loading" style="display:none">
+              LOADING
+            </div>
+            
+            <div class="details" style="display:none">
+              <div class="text"></div>
+              
+              <div class="timeline_container">
+                <div class="timeline">
+                  <div class="stripes"></div>
+                  <div class="hour_ticks"></div>
+                  <div class="hours"></div>
+                  <div class="temps"></div>
+                </div>
+              </div>
+
+            </div>
+            
+          </div>
+        </script>
+        <div id="outlook"></div>
+  
+      </div>
+      
+      
+      <!-- Location stats page -->
+      <div id="location_stats" class="page" style="display:none">
+        <h2>Average Yearly Temperature</h2>
+        <div class="plot_container"></div>
+        
+        <h2>Monthly Stats</h2>
+        <div class="monthly"></div>
+      </div>
+      
+      <!-- Time machine page -->
+      <div id="time_machine" class="page" style="display:none">
+        
+        <div class="overview">
+          <div class="day_time"></div>
+          <div class="day_summary"></div>
+          <div class="beta_note">(NOTE: Time Machine is still experimental. <a href="/contact.html">Let us know</a> if you encounter any problems.)</div>
+        </div>
+        
+        <div class="timeline_container">
+          <div class="timeline">
+            <div class="stripes"></div>
+            <div class="hour_ticks"></div>
+            <div class="hours"></div>
+            <div class="temps"></div>
+            
+            <div class="slider">
+              <div class="handle minimized">
+                <span class="line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="slider_details">
+          <div class="inner">
+            <div class="time"></div>
+            <div class="summary"></div>
+            
+            <table>
+              <thead>
+                <tr></tr>
+              </thead>
+              <tbody>
+                <tr class="val"></tr>
+                <tr class="error"></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="share">
+          <span>Share this day:</span>
+          <a class="facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u="></a>
+          <a class="twitter" target="_blank" href="http://twitter.com/home?status="></a>
+          <a class="gplus" target="_blank" href="https://plusone.google.com/_/+1/confirm?hl=en&url="></a>
+        </div>
+        
+      </div>
+      
+      
+      <!-- Error page -->
+      <div id="error" class="page" style="display:none">
+        
+        <div class="location error" style="display:none">
+          <h2>Cannot find that location</h2>
+          <div>Sorry about that! Make sure it is spelled correctly, or try some alternatives.</div>
+        </div>
+        
+        <div class="forecast error" style="display:none">
+          <h2>No forecast for this location</h2>
+          <div>Looks like we don't have a forecast for this location. Make sure it is spelled correctly, or try some alternatives.</div>
+        </div>
+        
+        <div class="time_machine error" style="display:none">
+          <h2>No data found</h2>
+          <div>Looks like we don't have historical data for this location at the given time. Sorry about that! Perhaps try a different time or place.</div>
+        </div>
+
+        <div class="old_ie error" style="display:none">
+          <h2>Sorry, Forecast does not support your version of Internet Explorer</h2>
+          <p>We only support versions 9 and 10 of Internet Explorer. <a href="http://microsoft.com/ie" target="_blank">Click here to upgrade.</a></p>
+        </div>
+
+        <div class="old_firefox error" style="display:none">
+          <h2>I'm sorry, but you'll need to <a href='https://www.mozilla.org/firefox' target='_blank'>update your version of Firefox</a></h2>
+        </div>
+
+        <div class="old_safari error" style="display:none">
+          <h2>I'm sorry, but your version of Safari is too old, please run Software Update</h2>
+        </div>
+
+        <div class="beta_mobile_support error" style="display:none">
+          <h2>Sorry, the Forecast beta does not yet work on mobile devices</h2>
+        </div>
+
+        <div class="not_online error" style="display:none">
+          <h2>Oops, but it looks like you aren't connected to the Internet</h2>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <!-- Footer content -->
+    <div id="footer">
+      <ul>
+        <li class="heading">Other Apps:</li>
+        <li><a href="http://darkskyapp.com">Dark Sky for <span style="text-transform:lowercase">i</span>OS</a></li>
+        <li><a href="/lines">Forecast Lines</a></li>
+        <li><a href="/powered-by.html">3rd Party Apps</a></li>
+      </ul>
+      
+      <ul>
+        <li class="heading">Developers:</li>
+        <li><a href="https://developer.forecast.io">Forecast API</a></li>
+        <li><a href="/raw">Our Data Sources</a></li>
+        <li><a href="http://blog.forecast.io/forecast-embeds/">HTML Embed / Widget</a></li>
+      </ul>
+      
+      <ul>
+        <li><a href="http://blog.forecast.io">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/sponsors.html">Sponsorship</a></li>
+      </ul>
+    </div>
+    
+  </div>
+  <script src="js/desktop.min.js?rel=1383165876172"></script>
+
+  <script type="text/javascript">
+  (function(){
+    var fusion = document.createElement('script');
+    fusion.src = window.location.protocol + '//adn.fusionads.net/api/1.0/ad.js?zoneid=234&rand=' + Math.floor(Math.random()*9999999);
+    fusion.async = true;
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(fusion);
+  })();</script>
+  
+  <script src="js/app/analytics.js"></script>
+
+</body>
+</html>
