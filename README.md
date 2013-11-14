@@ -3,19 +3,10 @@
 Small set of command line tools written in Go to help extracting data
 from webdevdata.org.
 
-## Using tools
+## Installing the tools
 
-You can find cross-compiled executables in the ```release``` directory.
-
-```bash
-$ ls release
-webdevdata-tools-darwin-386.tgz
-webdevdata-tools-darwin-amd64.tgz
-webdevdata-tools-linux-386.tgz
-webdevdata-tools-linux-amd64.tgz
-webdevdata-tools-windows-386.tgz
-webdevdata-tools-windows-amd64.tgz
-```
+**You can download binaries for Linux, Windows and Mac in the [GitHub releases
+page][releases].**
 
 ## ```wdd_meta_names [file]```
 
@@ -78,3 +69,5 @@ strong,1
 
 You can use ```make release``` to generate cross-compiled binaries for Linux,
 Windows and Mac.
+
+[releases]: https://github.com/Webdevdata/webdevdata-tools/releases
