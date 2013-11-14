@@ -17,6 +17,24 @@ webdevdata-tools-windows-386.tgz
 webdevdata-tools-windows-amd64.tgz
 ```
 
+## ```wdd_select [-atrs=attr1,attr2...] [CSS selector] [file]
+
+Searches for all tags matching the proviced ```CSS selector``` in
+```file``` and prits a CSV with ```file,tag_name``` to ```STDOUT```.
+
+The ```-attrs``` option can be used to provide a comma separated list of
+attributes to print in the CSV.
+
+Example:
+
+```bash
+$ wdd_select -attrs="class,id" "section, body > div" data_samples/forecast_io.html
+data_samples/forecast_io.html,div,inner,""
+data_samples/forecast_io.html,section,currently section,""
+data_samples/forecast_io.html,section,next_hour section,""
+data_samples/forecast_io.html,section,next_24_hours section,""
+```
+
 ## ```wdd_meta_names [file]```
 
 Checks HTML meta tags from ```file``` and prints a CSV with
@@ -25,11 +43,11 @@ Checks HTML meta tags from ```file``` and prints a CSV with
 example:
 
 ```bash
-$ wdd_meta_names webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt
-./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,description
-./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,google-site-verification
-./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,google-site-verification
-./webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt,y_key
+$ wdd_meta_names data_samples/jimsmarketingblog_com.html
+data_samples/jimsmarketingblog_com.html,description
+data_samples/jimsmarketingblog_com.html,google-site-verification
+data_samples/jimsmarketingblog_com.html,google-site-verification
+data_samples/jimsmarketingblog_com.html,y_key
 ```
 
 Generating CSV with all meta tag names from webdevdata.org crawl (using
@@ -46,8 +64,8 @@ with ```file,manifest_value``` to ```STDOUT```.
 example:
 
 ```bash
-$ wdd_html_manifest webdevdata.org-2013-10-30-231036/49/forecast.io_49bd380f592ae37fc74709838d2ace13.html.txt
-webdevdata.org-2013-10-30-231036/49/forecast.io_49bd380f592ae37fc74709838d2ace13.html.txt,cache.desktop.manifest
+$ wdd_html_manifest data_samples/forecast_io.html
+data_samples/forecast_io.html,cache.desktop.manifest
 ```
 
 ## ```wdd_tag_count [file]```
@@ -58,14 +76,17 @@ Counts all HTML tags from ```file``` and prints a CSV with
 example:
 
 ```bash
-$ wdd_tag_count webdevdata.org-2013-10-30-231036/19/jimsmarketingblog.com_19932518c6d628a198247a3f2a1322e6.html.txt
-link,16
-title,1
-span,29
-label,1
-script,15
-li,40
-strong,1
+$ wdd_tag_count data_samples/jimsmarketingblog_com.html
+data_samples/jimsmarketingblog_com.html,meta,13
+data_samples/jimsmarketingblog_com.html,li,40
+data_samples/jimsmarketingblog_com.html,footer,1
+data_samples/jimsmarketingblog_com.html,script,15
+data_samples/jimsmarketingblog_com.html,a,78
+data_samples/jimsmarketingblog_com.html,option,64
+data_samples/jimsmarketingblog_com.html,nav,1
+data_samples/jimsmarketingblog_com.html,img,11
+data_samples/jimsmarketingblog_com.html,input,4
+data_samples/jimsmarketingblog_com.html,center,8
 [...]
 ```
 
@@ -78,3 +99,4 @@ strong,1
 
 You can use ```make release``` to generate cross-compiled binaries for Linux,
 Windows and Mac.
+
