@@ -9,16 +9,20 @@ import "strconv"
 
 func main() {
   flag.Parse()
-  file := flag.Arg(0)
-  tags := make(map[string]int)
+  filesChan := make(chan string)
 
-  webdevdata.ProcessTags(file, func (token html.Token) {
-    tags[token.Data]++
-  })
-
+  go webdevdata.GetFiles(filesChan, 0)
   csv := csv.NewWriter(os.Stdout)
-  for tag, count := range tags {
-    csv.Write([]string{file, tag, strconv.Itoa(count)})
+
+  for file := range filesChan {
+    tags := make(map[string]int)
+    webdevdata.ProcessTags(file, func (token html.Token) {
+      tags[token.Data]++
+    })
+
+    for tag, count := range tags {
+      csv.Write([]string{file, tag, strconv.Itoa(count)})
+    }
   }
   csv.Flush()
 }
