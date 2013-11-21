@@ -5,6 +5,8 @@ import "code.google.com/p/cascadia"
 import "os"
 import "io"
 import "fmt"
+import "flag"
+import "bufio"
 
 func ProcessMatchingTags(file string, cssSel string, run func(*html.Node)) {
   selector := cascadia.MustCompile(cssSel)
@@ -60,5 +62,24 @@ func reader(file string) io.Reader {
     os.Exit(-1)
   }
   return reader
+}
+
+func GetFiles(filesChan chan string, skip int) {
+  if flag.NArg() > skip {
+    files := flag.Args()
+    for i, file := range files {
+      if i < skip { continue }
+      filesChan <- file
+    }
+  } else {
+    scanner := bufio.NewScanner(os.Stdin)
+    for scanner.Scan() {
+      filesChan <- scanner.Text()
+    }
+    if err := scanner.Err(); err != nil {
+      fmt.Fprintln(os.Stderr, "reading standard input:", err)
+    }
+  }
+  close(filesChan)
 }
 
