@@ -8,15 +8,20 @@ from webdevdata.org.
 **You can download binaries for Linux, Windows and Mac in the [GitHub releases
 page][releases].**
 
-## ```wdd_select [-atrs=attr1,attr2...] [CSS selector] [file]```
+## ```wdd_select [-atrs=attr1,attr2...] [CSS selector] [files]```
 
 Searches for all tags matching the proviced ```CSS selector``` in
 ```file``` and prits a CSV with ```file,tag_name``` to ```STDOUT```.
 
+Files to parse can be passed as arguments or via ```STDIN``` with one
+file per line.
+
 The ```-attrs``` option can be used to provide a comma separated list of
 attributes to print in the CSV.
 
-Example:
+Examples:
+
+Passing file as an argument and specifying attributes to print
 
 ```bash
 $ wdd_select -attrs="class,id" "section, body > div" data_samples/forecast_io.html
@@ -24,6 +29,16 @@ data_samples/forecast_io.html,div,inner,""
 data_samples/forecast_io.html,section,currently section,""
 data_samples/forecast_io.html,section,next_hour section,""
 data_samples/forecast_io.html,section,next_24_hours section,""
+```
+
+Passing files via ```STDIN```
+
+```bash
+$ find data_samples -name "*.html" | wdd_select "head, body"
+data_samples/forecast_io.html,head
+data_samples/forecast_io.html,body
+data_samples/jimsmarketingblog_com.html,head
+data_samples/jimsmarketingblog_com.html,body
 ```
 
 ## ```wdd_meta_names [file]```
