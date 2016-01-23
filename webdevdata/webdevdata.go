@@ -9,17 +9,20 @@ import "flag"
 import "bufio"
 
 func ProcessMatchingTags(file string, cssSel string, run func(*html.Node)) {
+	ProcessMatchingTagsReader(reader(file), cssSel, run)
+}
+
+func ProcessMatchingTagsReader(r io.Reader, cssSel string, run func(*html.Node)) error {
 	selector := cascadia.MustCompile(cssSel)
-	htmlReader := reader(file)
-	node, err := html.Parse(htmlReader)
+	node, err := html.Parse(r)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(-1)
+		return err
 	}
 	matchedNodes := selector.MatchAll(node)
 	for _, node := range matchedNodes {
 		run(node)
 	}
+	return nil
 }
 
 func ProcessTags(file string, process func(html.Token)) {
